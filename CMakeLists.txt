@@ -7,7 +7,7 @@ set(EXTERNAL_INSTALL_LOCATION ${CMAKE_BINARY_DIR}/external)
 FetchContent_Declare(
   opendnp3
   GIT_REPOSITORY https://github.com/dnp3/opendnp3.git
-  GIT_TAG        3.1.1
+  GIT_TAG        3.1.2
 )
 
 FetchContent_MakeAvailable(opendnp3)
