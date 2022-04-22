@@ -12,9 +12,6 @@ Redistribution and use in source and binary forms, with or without modification,
 
 #include <opendnp3/DNP3Manager.h>
 
-using namespace opendnp3;
-
-
 namespace der{
     void ReadAnalogValues();
     void ReadBinaryValues();

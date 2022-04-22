@@ -14,12 +14,10 @@ Redistribution and use in source and binary forms, with or without modification,
 
 #include "DEROutstation.h"
 
-using namespace der;
-
 /* Main Entry of the program */
 int main(int argc, char const *argv[])
 {
-    DEROutstation out;
+    der::DEROutstation out;
     out.CreateOutstation();
     return 0;
 }

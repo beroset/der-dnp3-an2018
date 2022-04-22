@@ -37,6 +37,7 @@ Redistribution and use in source and binary forms, with or without modification,
 #include <opendnp3/outstation/DefaultOutstationApplication.h>
 
 using namespace der;
+using namespace opendnp3;
 
 void DEROutstation::CreateOutstation()
 {

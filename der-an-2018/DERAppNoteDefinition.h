@@ -16,7 +16,6 @@ Redistribution and use in source and binary forms, with or without modification,
 #include <thread>
 #include <iostream>
 
-using namespace opendnp3;
 
 #define MAX_AOPOINTS 670
 #define MAX_BOPOINTS 50
@@ -24,6 +23,7 @@ using namespace opendnp3;
 #define MAX_BIPOINTS 329
 
 namespace der{
+    using opendnp3::PointClass;
 
             /* Typedef for Data structure containing information on each analog input point */
             typedef struct {

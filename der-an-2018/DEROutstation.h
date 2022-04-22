@@ -27,7 +27,6 @@ Redistribution and use in source and binary forms, with or without modification,
 
 
 namespace der{
-    using namespace opendnp3;
     class DEROutstation{
         private:
             struct State
@@ -35,11 +34,11 @@ namespace der{
                 uint32_t count = 0;
                 double value = 0;
                 bool binary = false;
-                DoubleBit dbit = DoubleBit::DETERMINED_OFF;
+                opendnp3::DoubleBit dbit = opendnp3::DoubleBit::DETERMINED_OFF;
                 uint8_t octetStringValue = 1;
             };
-            std::shared_ptr<IOutstation> outstation;
-            UpdateBuilder builder;
+            std::shared_ptr<opendnp3::IOutstation> outstation;
+            opendnp3::UpdateBuilder builder;
             CSVReaderMeasurement csv;
             std::vector<AnalogValues> aiMeas;
             std::vector<AnalogValues> aoMeas;
@@ -54,7 +53,7 @@ namespace der{
 
         public:
             void CreateOutstation();
-            void AddUpdates(UpdateBuilder& builder, State& state, const std::string& arguments);
+            void AddUpdates(opendnp3::UpdateBuilder& builder, State& state, const std::string& arguments);
             void UpdateBinaryInputs(std::vector<BinaryValues>);
             void UpdateAnalogInputs(std::vector<AnalogValues>);
             void UpdateBinaryOutputs(std::vector<BinaryValues>);

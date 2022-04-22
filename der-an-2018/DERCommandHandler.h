@@ -21,6 +21,7 @@ Redistribution and use in source and binary forms, with or without modification,
 #include "Schedule.h"
 
 namespace der{
+    using opendnp3::IUpdateHandler;
 
     class DERCommandHandler : public opendnp3::ICommandHandler
     {
@@ -127,7 +128,7 @@ namespace der{
             */
             virtual opendnp3::CommandStatus Operate(const opendnp3::AnalogOutputDouble64& command, uint16_t index, IUpdateHandler& handler, opendnp3::OperateType opType);
 
-            void SetOutstation(std::shared_ptr<IOutstation> &value);
+            void SetOutstation(std::shared_ptr<opendnp3::IOutstation> &value);
             opendnp3::CommandStatus AOSelect(const opendnp3::AnalogOutputInt32& command, uint16_t index);
             opendnp3::CommandStatus DirectOperate(const opendnp3::AnalogOutputInt32& command, uint16_t index, opendnp3::OperateType opType);
             void UpdateSelectedCurveInOutstation();
@@ -139,7 +140,7 @@ namespace der{
 
             std::shared_ptr<IDERCommandHandlerCallback> m_callbacks = DERCommandHandlerCallbackDefault::getInstance();
             std::shared_ptr<opendnp3::IOutstation> m_outstation;
-            UpdateBuilder builder;
+            opendnp3::UpdateBuilder builder;
 
             //Supported BO Points from IEEE 1547
             static const uint16_t BO_ENTER_SERVICE = 3;

@@ -10,6 +10,7 @@ Redistribution and use in source and binary forms, with or without modification,
 #include "DERCommandHandler.h"
 
 using namespace der;
+using namespace opendnp3;
 
 DERCommandHandler::DERCommandHandler(std::shared_ptr<IDERCommandHandlerCallback> callbacks){
     if (callbacks != nullptr) {
