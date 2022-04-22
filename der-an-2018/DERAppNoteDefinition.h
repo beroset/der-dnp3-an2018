@@ -1,7 +1,7 @@
 /*
 Copyright © 2019 Electric Power Research Institute, Inc. All rights reserved.
 
-Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met: 
+Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
 · Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
 · Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.
 · Neither the name of the EPRI nor the names of its contributors may be used to endorse or promote products derived from this software without specific prior written permission
@@ -23,12 +23,12 @@ using namespace opendnp3;
 #define MAX_BOPOINTS 50
 #define MAX_AIPOINTS 1009
 #define MAX_BIPOINTS 329
- 
+
 namespace der{
 
             /* Typedef for Data structure containing information on each analog input point */
             typedef struct {
-                uint16_t   PointIndex;	
+                uint16_t   PointIndex;
                 std::string NameStr;
                 int32_t     MinValue;
                 int32_t     MaxValue;
@@ -37,7 +37,7 @@ namespace der{
 
             /* Typedef for Data structure containing information on each analog output point */
             typedef struct {
-                uint16_t   PointIndex;	
+                uint16_t   PointIndex;
                 std::string NameStr;
                 int32_t     MinValue;
                 int32_t     MaxValue;
@@ -47,14 +47,14 @@ namespace der{
 
             /* Typedef for Data structure containing information on each binary input point */
             typedef struct {
-                uint16_t   PointIndex;	
+                uint16_t   PointIndex;
                 std::string NameStr;
                 PointClass  DefEvtClass;
             } BinaryInputPointDefinition;
 
             /* Typedef for Data structure containing information on each binary output point */
             typedef struct {
-                uint16_t   PointIndex;	
+                uint16_t   PointIndex;
                 std::string NameStr;
                 PointClass  DefEvtClass;
                 bool        Supported;
@@ -63,7 +63,7 @@ namespace der{
 
             const AnalogOutputPointDefinition AOPoints[MAX_AOPOINTS] =
             {
-				{0,"RefVolt",0,2147483647,true,29},
+                {0,"RefVolt",0,2147483647,true,29},
                 {1,"RefVoltOffset",-2147483648,2147483647,true,30},
                 {2,"NominalGridFreq",0,70000,false,65535},
                 {3,"OpenLoopResponseTMPerc",0,1000,false,65535},
@@ -524,7 +524,7 @@ namespace der{
                 {458,"SMPhaseBVoltsLOTHOLD",0,2147483647,false,65535},
                 {459,"SMPhaseCVoltsHITHOLD",0,2147483647,false,65535},
                 {460,"SMPhaseCVoltsLOTHOLD",0,2147483647,false,65535},
-				{461,"ScheduleEditorSelector",0,2147483647,true,570},
+                {461,"ScheduleEditorSelector",0,2147483647,true,570},
                 {462,"SelectedScheduleIdentity",0,2147483647,true,571},
                 {463,"SelectedSchedulePriority",0,2147483647,true,572},
                 {464,"SelectedScheduleType",0,30,true,573},

@@ -1,7 +1,7 @@
 /*
 Copyright © 2019 Electric Power Research Institute, Inc. All rights reserved.
 
-Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met: 
+Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
 · Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
 · Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.
 · Neither the name of the EPRI nor the names of its contributors may be used to endorse or promote products derived from this software without specific prior written permission
@@ -31,7 +31,7 @@ opendnp3::CommandStatus DERCommandHandler::Select(const opendnp3::ControlRelayOu
     return cmdStat;
 }
 
-const uint8_t ONLINE = 0x81; 
+const uint8_t ONLINE = 0x81;
 
 /* Handling OPERATE commands for Binary Outputs */
 opendnp3::CommandStatus DERCommandHandler::Operate(const opendnp3::ControlRelayOutputBlock& command, uint16_t index, IUpdateHandler& handler, opendnp3::OperateType opType){
@@ -40,7 +40,7 @@ opendnp3::CommandStatus DERCommandHandler::Operate(const opendnp3::ControlRelayO
         if(index < 0 || index >= MAX_BOPOINTS)
             return opendnp3::CommandStatus::OUT_OF_RANGE;
 
-    //Enter if the device supports the function 
+    //Enter if the device supports the function
     if(BOPoints[index].Supported){
 
         //Update BinaryOutputStattus
@@ -52,152 +52,152 @@ opendnp3::CommandStatus DERCommandHandler::Operate(const opendnp3::ControlRelayO
             if(command.opType == opendnp3::OperationType::LATCH_ON || command.opType == opendnp3::OperationType::PULSE_ON){
                 m_callbacks->EnableEnterService(m_VoltageHighLimit, m_VoltageLowLimit, m_FrequencyHighLimit, m_FrequencyLowLimit, m_DERStartDelay, m_DERStartTimeWindow, m_DERStartRampUpTime);
                 cmdStat = opendnp3::CommandStatus::SUCCESS;
-            }           
+            }
             else if (command.opType == opendnp3::OperationType::LATCH_OFF || command.opType == opendnp3::OperationType::PULSE_OFF){
                 m_callbacks->DisableEnterService();
                 cmdStat = opendnp3::CommandStatus::SUCCESS;
             }
             else /* Raise FORMAT_ERROR incase the control code is not supported */
-                cmdStat = opendnp3::CommandStatus::FORMAT_ERROR; 
+                cmdStat = opendnp3::CommandStatus::FORMAT_ERROR;
         }
         else if (index == BO_POWER_FACTOR_DISCHARGING){
             if(command.opType == opendnp3::OperationType::LATCH_ON || command.opType == opendnp3::OperationType::PULSE_ON){
                 m_powerFactorExcitationDischarging = true;
                 cmdStat = opendnp3::CommandStatus::SUCCESS;
-            }            
+            }
             else if (command.opType == opendnp3::OperationType::LATCH_OFF || command.opType == opendnp3::OperationType::PULSE_OFF){
                 m_powerFactorExcitationDischarging = false;
                 cmdStat = opendnp3::CommandStatus::SUCCESS;
             }
             else /* Raise FORMAT_ERROR incase the control code is not supported */
-                cmdStat = opendnp3::CommandStatus::FORMAT_ERROR; 
+                cmdStat = opendnp3::CommandStatus::FORMAT_ERROR;
         }
         else if (index == BO_POWER_FACTOR_CHARGING){
             if(command.opType == opendnp3::OperationType::LATCH_ON || command.opType == opendnp3::OperationType::PULSE_ON){
                 m_powerFactorExcitationCharging = true;
                 cmdStat = opendnp3::CommandStatus::SUCCESS;
-            }         
+            }
             else if (command.opType == opendnp3::OperationType::LATCH_OFF || command.opType == opendnp3::OperationType::PULSE_OFF){
                 m_powerFactorExcitationCharging = false;
                 cmdStat = opendnp3::CommandStatus::SUCCESS;
             }
             else /* Raise FORMAT_ERROR incase the control code is not supported */
-                cmdStat = opendnp3::CommandStatus::FORMAT_ERROR; 
+                cmdStat = opendnp3::CommandStatus::FORMAT_ERROR;
         }
         else if (index == BO_DYNAMIC_REACTIVE_CURRENT_MODE){
             if(command.opType == opendnp3::OperationType::LATCH_ON || command.opType == opendnp3::OperationType::PULSE_ON){
                 cmdStat = opendnp3::CommandStatus::SUCCESS;
-            }      
+            }
             else if (command.opType == opendnp3::OperationType::LATCH_OFF || command.opType == opendnp3::OperationType::PULSE_OFF){
                 cmdStat = opendnp3::CommandStatus::SUCCESS;
             }
             else /* Raise FORMAT_ERROR incase the control code is not supported */
-                cmdStat = opendnp3::CommandStatus::FORMAT_ERROR; 
+                cmdStat = opendnp3::CommandStatus::FORMAT_ERROR;
         }
         else if (index == B0_LIMIT_ACTIVE_POWER){
             if(command.opType == opendnp3::OperationType::LATCH_ON || command.opType == opendnp3::OperationType::PULSE_ON){
                 m_callbacks->EnableActiveLimitPower(m_activePowerLimitDisCharge, m_activePowerLimitCharge);
                 cmdStat = opendnp3::CommandStatus::SUCCESS;
-            }          
+            }
             else if (command.opType == opendnp3::OperationType::LATCH_OFF || command.opType == opendnp3::OperationType::PULSE_OFF){
                 m_callbacks->DisableActiveLimitPower();
                 cmdStat = opendnp3::CommandStatus::SUCCESS;
             }
             else /* Raise FORMAT_ERROR incase the control code is not supported */
-                cmdStat = opendnp3::CommandStatus::FORMAT_ERROR; 
+                cmdStat = opendnp3::CommandStatus::FORMAT_ERROR;
         }
         else if (index == B0_CHARGE_DISCHARGE_MODE){
             if(command.opType == opendnp3::OperationType::LATCH_ON || command.opType == opendnp3::OperationType::PULSE_ON){
                 cmdStat = opendnp3::CommandStatus::SUCCESS;
-            }            
+            }
             else if (command.opType == opendnp3::OperationType::LATCH_OFF || command.opType == opendnp3::OperationType::PULSE_OFF){
                 cmdStat = opendnp3::CommandStatus::SUCCESS;
             }
             else /* Raise FORMAT_ERROR incase the control code is not supported */
-                cmdStat = opendnp3::CommandStatus::FORMAT_ERROR; 
+                cmdStat = opendnp3::CommandStatus::FORMAT_ERROR;
         }
         else if (index == BO_VOLT_WATT_MODE){
             if(command.opType == opendnp3::OperationType::LATCH_ON || command.opType == opendnp3::OperationType::PULSE_ON){
                 if(m_activeCurve != nullptr)
                     m_callbacks->EnableCurve(m_activeCurve);
                 cmdStat = opendnp3::CommandStatus::SUCCESS;
-            }            
+            }
             else if (command.opType == opendnp3::OperationType::LATCH_OFF || command.opType == opendnp3::OperationType::PULSE_OFF){
                 m_callbacks->DisableCurve(m_activeCurve);
                 cmdStat = opendnp3::CommandStatus::SUCCESS;
             }
             else /* Raise FORMAT_ERROR incase the control code is not supported */
-                cmdStat = opendnp3::CommandStatus::FORMAT_ERROR; 
+                cmdStat = opendnp3::CommandStatus::FORMAT_ERROR;
         }
         else if (index == BO_CONST_VAR_MODE){
             if(command.opType == opendnp3::OperationType::LATCH_ON || command.opType == opendnp3::OperationType::PULSE_ON){
                 m_callbacks->EnableConstantVARs(m_constReactivePower);
                 cmdStat = opendnp3::CommandStatus::SUCCESS;
-            }           
+            }
             else if (command.opType == opendnp3::OperationType::LATCH_OFF || command.opType == opendnp3::OperationType::PULSE_OFF){
                 m_callbacks->DisableConstantVARs();
                 cmdStat = opendnp3::CommandStatus::SUCCESS;
             }
             else /* Raise FORMAT_ERROR incase the control code is not supported */
-                cmdStat = opendnp3::CommandStatus::FORMAT_ERROR; 
+                cmdStat = opendnp3::CommandStatus::FORMAT_ERROR;
         }
         else if (index == BO_CONST_POWER_FACTOR){
             if(command.opType == opendnp3::OperationType::LATCH_ON || command.opType == opendnp3::OperationType::PULSE_ON){
                 m_callbacks->EnablePowerFactor(m_powerFactorDischarging, m_powerFactorCharging, m_powerFactorExcitationDischarging, m_powerFactorExcitationCharging);
                 cmdStat = opendnp3::CommandStatus::SUCCESS;
-            }          
+            }
             else if (command.opType == opendnp3::OperationType::LATCH_OFF || command.opType == opendnp3::OperationType::PULSE_OFF){
                 m_callbacks->DisablePowerFactor();
                 cmdStat = opendnp3::CommandStatus::SUCCESS;
             }
             else /* Raise FORMAT_ERROR incase the control code is not supported */
-                cmdStat = opendnp3::CommandStatus::FORMAT_ERROR; 
+                cmdStat = opendnp3::CommandStatus::FORMAT_ERROR;
         }
         else if (index == BO_VOLT_VAR_MODE){
             if(command.opType == opendnp3::OperationType::LATCH_ON || command.opType == opendnp3::OperationType::PULSE_ON){
                 if(m_activeCurve != nullptr)
                     m_callbacks->EnableCurve(m_activeCurve);
                 cmdStat = opendnp3::CommandStatus::SUCCESS;
-            }        
+            }
             else if (command.opType == opendnp3::OperationType::LATCH_OFF || command.opType == opendnp3::OperationType::PULSE_OFF){
                 m_callbacks->DisableCurve(m_activeCurve);
                 cmdStat = opendnp3::CommandStatus::SUCCESS;
             }
             else /* Raise FORMAT_ERROR incase the control code is not supported */
-                cmdStat = opendnp3::CommandStatus::FORMAT_ERROR; 
+                cmdStat = opendnp3::CommandStatus::FORMAT_ERROR;
         }
         else if (index == BO_WATT_VAR_MODE){
             if(command.opType == opendnp3::OperationType::LATCH_ON || command.opType == opendnp3::OperationType::PULSE_ON){
                 if(m_activeCurve != nullptr)
                     m_callbacks->EnableCurve(m_activeCurve);
                 cmdStat = opendnp3::CommandStatus::SUCCESS;
-            }            
+            }
             else if (command.opType == opendnp3::OperationType::LATCH_OFF || command.opType == opendnp3::OperationType::PULSE_OFF){
                 m_callbacks->DisableCurve(m_activeCurve);
                 cmdStat = opendnp3::CommandStatus::SUCCESS;
             }
             else /* Raise FORMAT_ERROR incase the control code is not supported */
-                cmdStat = opendnp3::CommandStatus::FORMAT_ERROR; 
+                cmdStat = opendnp3::CommandStatus::FORMAT_ERROR;
         }
         else if (index == BO_EVENT_BASED_DYNAMIC_REACTIVE_CURRENT_MODE){
             if(command.opType == opendnp3::OperationType::LATCH_ON || command.opType == opendnp3::OperationType::PULSE_ON) {
                 cmdStat = opendnp3::CommandStatus::SUCCESS;
-            }            
+            }
             else if (command.opType == opendnp3::OperationType::LATCH_OFF || command.opType == opendnp3::OperationType::PULSE_OFF) {
                 cmdStat = opendnp3::CommandStatus::SUCCESS;
             }
             else /* Raise FORMAT_ERROR incase the control code is not supported */
-                cmdStat = opendnp3::CommandStatus::FORMAT_ERROR; 
+                cmdStat = opendnp3::CommandStatus::FORMAT_ERROR;
         }
         else if (index == B0_CHARGE_DISCHARGE_USE_RAMP_RATES){
             if(command.opType == opendnp3::OperationType::LATCH_ON || command.opType == opendnp3::OperationType::PULSE_ON) {
                 cmdStat = opendnp3::CommandStatus::SUCCESS;
-            }            
+            }
             else if (command.opType == opendnp3::OperationType::LATCH_OFF || command.opType == opendnp3::OperationType::PULSE_OFF){
                 cmdStat = opendnp3::CommandStatus::SUCCESS;
             }
             else /* Raise FORMAT_ERROR incase the control code is not supported */
-                cmdStat = opendnp3::CommandStatus::FORMAT_ERROR; 
+                cmdStat = opendnp3::CommandStatus::FORMAT_ERROR;
         }
         else if (index == B0_SET_SELECTED_SCHEDULE_READY){
             if(command.opType == opendnp3::OperationType::LATCH_ON || command.opType == opendnp3::OperationType::PULSE_ON){
@@ -215,15 +215,15 @@ opendnp3::CommandStatus DERCommandHandler::Operate(const opendnp3::ControlRelayO
                     cmdStat = opendnp3::CommandStatus::OUT_OF_RANGE;
                 }
 
-                //Update BI109 Selected Schedule is Validated Bit 
+                //Update BI109 Selected Schedule is Validated Bit
                 builder.Update(Binary(true, Flags(ONLINE)), BI_SELECTED_SCHEDULE_VALIDATED);
-            }                        
+            }
             else if (command.opType == opendnp3::OperationType::LATCH_OFF || command.opType == opendnp3::OperationType::PULSE_OFF){
                     m_callbacks->DisableSchedule(m_activeSchedule);
                     cmdStat = opendnp3::CommandStatus::SUCCESS;
             }
             else /* Raise FORMAT_ERROR incase the control code is not supported */
-                cmdStat = opendnp3::CommandStatus::FORMAT_ERROR; 
+                cmdStat = opendnp3::CommandStatus::FORMAT_ERROR;
         }
     }
     else /* Raise NOT_SUPPORTED incase the device doesn't support the funtion or mode */
@@ -294,7 +294,7 @@ opendnp3::CommandStatus DERCommandHandler::AOSelect(const opendnp3::AnalogOutput
 }
 
 opendnp3::CommandStatus DERCommandHandler::DirectOperate(const opendnp3::AnalogOutputInt32& command, uint16_t index, opendnp3::OperateType opType){
-    
+
     if(index < 0 || index >= MAX_AOPOINTS)
         return opendnp3::CommandStatus::OUT_OF_RANGE;
 
@@ -311,7 +311,7 @@ opendnp3::CommandStatus DERCommandHandler::DirectOperate(const opendnp3::AnalogO
             //Data Range validation
             if(command.value >= AOPoints[index].MinValue && command.value <= AOPoints[index].MaxValue){
                 cmdStat = opendnp3::CommandStatus::SUCCESS;
-            } 
+            }
             else
                 cmdStat = opendnp3::CommandStatus::OUT_OF_RANGE;
         }
@@ -761,7 +761,7 @@ opendnp3::CommandStatus DERCommandHandler::DirectOperate(const opendnp3::AnalogO
             if(command.value >= AOPoints[index].MinValue && command.value <= AOPoints[index].MaxValue){
                 cmdStat = opendnp3::CommandStatus::SUCCESS;
                 //Add the curve Index
-                if(m_curveModeIndex.find(index) != m_curveModeIndex.end()) 
+                if(m_curveModeIndex.find(index) != m_curveModeIndex.end())
                     m_curveModeIndex[index]= (unsigned) command.value;
                 else
                     m_curveModeIndex.insert({index, (unsigned) command.value});
@@ -801,7 +801,7 @@ opendnp3::CommandStatus DERCommandHandler::DirectOperate(const opendnp3::AnalogO
             if(command.value >= AOPoints[index].MinValue && command.value <= AOPoints[index].MaxValue){
                 cmdStat = opendnp3::CommandStatus::SUCCESS;
                 //Add the curve Index
-                if(m_curveModeIndex.find(index) != m_curveModeIndex.end()) 
+                if(m_curveModeIndex.find(index) != m_curveModeIndex.end())
                     m_curveModeIndex[index]= (unsigned) command.value;
                 else
                     m_curveModeIndex.insert({index, (unsigned) command.value});
@@ -838,7 +838,7 @@ opendnp3::CommandStatus DERCommandHandler::DirectOperate(const opendnp3::AnalogO
             if(command.value >= AOPoints[index].MinValue && command.value <= AOPoints[index].MaxValue){
                 cmdStat = opendnp3::CommandStatus::SUCCESS;
                 //Add the curve Index
-                if(m_curveModeIndex.find(index) != m_curveModeIndex.end()) 
+                if(m_curveModeIndex.find(index) != m_curveModeIndex.end())
                     m_curveModeIndex[index]= (unsigned) command.value;
                 else
                     m_curveModeIndex.insert({index, (unsigned) command.value});
@@ -855,7 +855,7 @@ opendnp3::CommandStatus DERCommandHandler::DirectOperate(const opendnp3::AnalogO
             }
             else{
                 m_selectedCurveIndex = command.value;
-                
+
                 if (m_curves.find(m_selectedCurveIndex) == m_curves.end()) {
                     std::cout << "Curve does not exist, creating a new one" << std::endl;
                     //the curve does not exist; add a new one
@@ -893,7 +893,7 @@ opendnp3::CommandStatus DERCommandHandler::DirectOperate(const opendnp3::AnalogO
             }
             else{
                 m_selectedScheduleIndex = command.value;
-                
+
                 if (m_schedules.find(m_selectedScheduleIndex) == m_schedules.end()) {
                     std::cout << "Schedule does not exist, creating a new one" << std::endl;
                     //the Schedule does not exist; add a new one
@@ -944,7 +944,7 @@ opendnp3::CommandStatus DERCommandHandler::DirectOperate(const opendnp3::AnalogO
             builder.Update(AnalogOutputStatus((double) m_activeCurveParams[i], Flags(ONLINE)) , index);
             //Update Mapped Analog Input
             builder.Update(Analog((double) m_activeCurveParams[i], Flags(ONLINE)),AOPoints[index].MappedInput);
-        }      
+        }
         m_outstation->Apply(builder.Build());
     }
 
@@ -952,12 +952,12 @@ opendnp3::CommandStatus DERCommandHandler::DirectOperate(const opendnp3::AnalogO
     void DERCommandHandler::UpdateSelectedCurveState(uint8_t curveIndex){
         std::cout << "Updating the “Selected Curve is Referenced by a Mode” ( BI107) based on the curve state" << std::endl;
         float *m_activeCurveParams = m_activeCurve->GetActiveCurveParameters();
- 
+
         //Get the selected curve's no. of points
         int index = NUM_PARAMS_CURVES - (MAX_CURVE_INDEX - NUM_POINTS_CURVES) - 1;
         unsigned numPoints = (unsigned) m_activeCurveParams[index];
 
-        // Check if any of the DER modes has the value of the selected curve index 
+        // Check if any of the DER modes has the value of the selected curve index
         bool derRef = false;
         std::unordered_map<unsigned, unsigned>::iterator iter;
         for(iter = m_curveModeIndex.begin(); iter != m_curveModeIndex.end(); iter++)
@@ -982,7 +982,7 @@ opendnp3::CommandStatus DERCommandHandler::DirectOperate(const opendnp3::AnalogO
     /* Updates the Outstation with the selected schedule parameters */
     void DERCommandHandler::UpdateSelectedScheduleInOutstation(){
         std::cout << "Updating the Outstation with the selected schedule" << std::endl;
-        
+
         float* m_activeScheduleParams = m_activeSchedule->GetActiveScheduleParameters();
 
         for (int index = 462; index <= 669; index++){
@@ -991,9 +991,9 @@ opendnp3::CommandStatus DERCommandHandler::DirectOperate(const opendnp3::AnalogO
             builder.Update(AnalogOutputStatus((double) m_activeScheduleParams[i], Flags(ONLINE)) , index);
             //Update Mapped Analog Input
             builder.Update(Analog((double) m_activeScheduleParams[i], Flags(ONLINE)),AOPoints[index].MappedInput);
-        }      
+        }
 
-        //Update BI109 Selected Schedule is Validated Bit 
+        //Update BI109 Selected Schedule is Validated Bit
         builder.Update(Binary(false, Flags(ONLINE)), BI_SELECTED_SCHEDULE_VALIDATED );
         m_outstation->Apply(builder.Build());
     }
