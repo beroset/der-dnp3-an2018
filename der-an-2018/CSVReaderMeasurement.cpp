@@ -12,18 +12,17 @@ Redistribution and use in source and binary forms, with or without modification,
 #include <iostream>
 #include <sstream>
 
-using namespace der;
-
-void CSVReaderMeasurement::ReadBinaryValues(vector<BinaryValues>& bMeas, string fpath){
+namespace der{
+void CSVReaderMeasurement::ReadBinaryValues(std::vector<BinaryValues>& bMeas, std::string fpath){
 
     //Clear the vector before reading
     bMeas.clear();
 
-    ifstream ip(fpath);
+    std::ifstream ip(fpath);
 
     if(!ip.is_open())
     {
-        std::cout<<"Error opening file"<<endl;
+        std::cout<<"Error opening file"<<std::endl;
         return ;
     }
 
@@ -61,16 +60,16 @@ void CSVReaderMeasurement::ReadBinaryValues(vector<BinaryValues>& bMeas, string 
      ip.close();
 }
 
-void CSVReaderMeasurement::ReadAnalogValues(vector<AnalogValues>& aMeas, string fpath){
+void CSVReaderMeasurement::ReadAnalogValues(std::vector<AnalogValues>& aMeas, std::string fpath){
 
     //Clear the vector before reading
     aMeas.clear();
 
-    ifstream ip(fpath);
+    std::ifstream ip(fpath);
 
     if(!ip.is_open())
     {
-        std::cout<<"Error opening file"<<endl;
+        std::cout<<"Error opening file"<<std::endl;
         return;
     }
 
@@ -105,4 +104,5 @@ void CSVReaderMeasurement::ReadAnalogValues(vector<AnalogValues>& aMeas, string 
          values.clear();
      }
      ip.close();
+}
 }

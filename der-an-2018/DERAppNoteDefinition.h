@@ -16,7 +16,6 @@ Redistribution and use in source and binary forms, with or without modification,
 #include <thread>
 #include <iostream>
 
-using namespace std;
 using namespace opendnp3;
 
 #define MAX_AOPOINTS 670

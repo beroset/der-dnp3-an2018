@@ -15,8 +15,8 @@ Redistribution and use in source and binary forms, with or without modification,
 namespace der{
     class CSVReaderMeasurement{
         public:
-            void ReadBinaryValues(vector<BinaryValues>& bMeas, string fpath);
-            void ReadAnalogValues(vector<AnalogValues>& aMeas, string fpath);
+            void ReadBinaryValues(std::vector<BinaryValues>& bMeas, std::string fpath);
+            void ReadAnalogValues(std::vector<AnalogValues>& aMeas, std::string fpath);
     };
 }
 #endif

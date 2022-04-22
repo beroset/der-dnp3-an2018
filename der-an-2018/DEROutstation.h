@@ -25,10 +25,9 @@ Redistribution and use in source and binary forms, with or without modification,
 #include "DERCommandHandlerCallbackDefault.h"
 
 
-using namespace std;
-using namespace opendnp3;
 
 namespace der{
+    using namespace opendnp3;
     class DEROutstation{
         private:
             struct State
@@ -42,10 +41,10 @@ namespace der{
             std::shared_ptr<IOutstation> outstation;
             UpdateBuilder builder;
             CSVReaderMeasurement csv;
-            vector<AnalogValues> aiMeas;
-            vector<AnalogValues> aoMeas;
-            vector<BinaryValues> biMeas;
-            vector<BinaryValues> boMeas;
+            std::vector<AnalogValues> aiMeas;
+            std::vector<AnalogValues> aoMeas;
+            std::vector<BinaryValues> biMeas;
+            std::vector<BinaryValues> boMeas;
 
             std::string caCertificate = "TLS/ca.crt";
             std::string certificateChain = "TLS/ia_master_chain.pem";
@@ -56,10 +55,10 @@ namespace der{
         public:
             void CreateOutstation();
             void AddUpdates(UpdateBuilder& builder, State& state, const std::string& arguments);
-            void UpdateBinaryInputs(vector<BinaryValues>);
-            void UpdateAnalogInputs(vector<AnalogValues>);
-            void UpdateBinaryOutputs(vector<BinaryValues>);
-            void UpdateAnalogOutputs(vector<AnalogValues>);
+            void UpdateBinaryInputs(std::vector<BinaryValues>);
+            void UpdateAnalogInputs(std::vector<AnalogValues>);
+            void UpdateBinaryOutputs(std::vector<BinaryValues>);
+            void UpdateAnalogOutputs(std::vector<AnalogValues>);
     };
 }
 

@@ -41,18 +41,19 @@ using namespace der;
 void DEROutstation::CreateOutstation()
 {
     //Copyright Text
-    std::cout<<"******************************************************************************"<<endl;
-    std::cout<<"DER Outstation AN2018 (DOSTAN18) Version 0.1.7"<<endl;
-    std::cout<<"******************************************************************************"<<endl;
-    std::cout<<"Copyright © 2019 Electric Power Research Institute, Inc. All Rights Reserved."<<endl;
-    std::cout<<"Permission to use, copy, modify, and distribute this software for any purpose" <<endl;
-    std::cout<<"with or without fee is hereby granted, provided that the above copyright notice "<<endl;
-    std::cout<<"and this permission notice appear in all copies."<<endl;
-    std::cout<<"******************************************************************************"<<endl;
-    std::cout<<"This software is provided by EPRI \"AS IS\" and without customer support beyond "<<endl;
-    std::cout<<"such embodiments within the distribution of this software that may or may not "<<endl;
-    std:cout<<"provide such support."<<endl;
-    std::cout<<"******************************************************************************"<<endl;
+    std::cout << 
+        "******************************************************************************\n"
+        "DER Outstation AN2018 (DOSTAN18) Version 0.1.7\n"
+        "******************************************************************************\n"
+        "Copyright © 2019 Electric Power Research Institute, Inc. All Rights Reserved.\n"
+        "Permission to use, copy, modify, and distribute this software for any purpose\n"
+        "with or without fee is hereby granted, provided that the above copyright notice \n"
+        "and this permission notice appear in all copies.\n"
+        "******************************************************************************\n"
+        "This software is provided by EPRI \"AS IS\" and without customer support beyond \n"
+        "such embodiments within the distribution of this software that may or may not \n"
+        "provide such support.\n"
+        "******************************************************************************\n";
 
     // Specify what log levels to use. NORMAL is warning and above
     // You can add all the comms logging by uncommenting below.
@@ -178,13 +179,13 @@ void DEROutstation::CreateOutstation()
     derCommand->SetOutstation(outstation);
 
     // variables used in example loop
-    string input;
+    std::string input;
     State state;
 
     while (true)
     {
         std::cout << "In DER AN2018 outstation. Select an option and then press <enter>" << std::endl;
-        std::cout << "a = Update Analog Inputs to Outstation, b = Update Binary Inputs to Outstation"<<endl;
+        std::cout << "a = Update Analog Inputs to Outstation, b = Update Binary Inputs to Outstation" << std::endl;
         std::cout << "c = Update Analog Outputs to Outstation, d = Update Binary Outputs to Outstation 'quit' = exit" << std::endl;
         std::cin >> input;
 
@@ -256,7 +257,7 @@ void DEROutstation::AddUpdates(UpdateBuilder& builder, State& state, const std::
 }
 
 /* Update Binary Inputs to the outstation */
-void DEROutstation::UpdateBinaryInputs(vector<BinaryValues> values){
+void DEROutstation::UpdateBinaryInputs(std::vector<BinaryValues> values){
     int size = values.size();
 
     for (auto v : values){
@@ -267,7 +268,7 @@ void DEROutstation::UpdateBinaryInputs(vector<BinaryValues> values){
 }
 
 /* Update Analog Inputs to the outstation */
-void DEROutstation::UpdateAnalogInputs(vector<AnalogValues> values){
+void DEROutstation::UpdateAnalogInputs(std::vector<AnalogValues> values){
 
     for (auto v : values)
     {
@@ -279,7 +280,7 @@ void DEROutstation::UpdateAnalogInputs(vector<AnalogValues> values){
 }
 
 /* Update Binary Outputs to the outstation */
-void DEROutstation::UpdateBinaryOutputs(vector<BinaryValues> values){
+void DEROutstation::UpdateBinaryOutputs(std::vector<BinaryValues> values){
 
     for (auto v : values)
     {
@@ -293,7 +294,7 @@ void DEROutstation::UpdateBinaryOutputs(vector<BinaryValues> values){
 }
 
 /* Update Analog Outputs to the outstation */
-void DEROutstation::UpdateAnalogOutputs(vector<AnalogValues> values){
+void DEROutstation::UpdateAnalogOutputs(std::vector<AnalogValues> values){
 
     for (auto v : values)
     {
